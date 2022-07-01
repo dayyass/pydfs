@@ -10,7 +10,9 @@ def parse_args() -> argparse.Namespace:
     """
 
     parser = argparse.ArgumentParser()
-    subparsers = parser.add_subparsers()
+
+    # https://stackoverflow.com/questions/8250010/argparse-identify-which-subparser-was-used
+    subparsers = parser.add_subparsers(dest="command")
 
     # init command
     subparser_init = subparsers.add_parser(
@@ -30,7 +32,7 @@ def parse_args() -> argparse.Namespace:
         "dfs",
         help="dfs commands",
     )
-    subsubparsers_dfs = subparser_dfs.add_subparsers()
+    subsubparsers_dfs = subparser_dfs.add_subparsers(dest="subcommand")
 
     # dfs put command
     subsubparser_dfs_put = subsubparsers_dfs.add_parser(
