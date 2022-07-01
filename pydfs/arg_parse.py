@@ -14,17 +14,29 @@ def parse_args() -> argparse.Namespace:
     # https://stackoverflow.com/questions/8250010/argparse-identify-which-subparser-was-used
     subparsers = parser.add_subparsers(dest="command")
 
-    # init command
+    # init commands
     subparser_init = subparsers.add_parser(
         "init",
         help="init commands",
     )
-    subparser_init.add_argument(
-        "--node",
+    subsubparsers_init = subparser_init.add_subparsers(dest="subcommand")
+
+    # init master command
+    subsubparsers_init.add_parser(
+        "master",
+        help="init pydfs master node",
+    )
+
+    # init slave command
+    subsubparser_init_slave = subsubparsers_init.add_parser(
+        "slave",
+        help="init pydfs slave node",
+    )
+    subsubparser_init_slave.add_argument(
+        "--master_ip",
         type=str,
         required=True,
-        choices=["master", "slave"],
-        help="init pydfs as master or slave node",
+        help="pydfs master node IP",
     )
 
     # dfs commands

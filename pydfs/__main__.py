@@ -9,18 +9,16 @@ if __name__ == "__main__":
 
     if args.command == "init":
 
-        if args.node == "master":
-            _logger.info(f"pydfs init --node {args.node}")
+        if args.subcommand == "master":
+            _logger.info(f"pydfs init {args.subcommand}")
             cmd_init_master()
 
-        elif args.node == "slave":
-            _logger.info(f"pydfs init --node {args.node}")
-            cmd_init_slave()
+        elif args.subcommand == "slave":
+            _logger.info(f"pydfs init {args.subcommand} --master_ip {args.master_ip}")
+            cmd_init_slave(master_ip=args.master_ip)
 
         else:
-            err_msg = (
-                f"unknown init --node argument: '{args.node}' (use 'master' or 'slave')"
-            )
+            err_msg = f"unknown init subcommand: '{args.subcommand}' (use 'master' or 'slave')"
             _logger.error(err_msg)
             raise ValueError(err_msg)
 
