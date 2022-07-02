@@ -1,3 +1,4 @@
+import os
 import sqlite3
 import sys  # TODO: remove it
 from datetime import datetime
@@ -20,7 +21,7 @@ api = Api(app)
 # TODO: remove check_same_thread=False
 _logger.info("creating master.sqlite")
 conn = sqlite3.connect(
-    "master.sqlite",  # TODO: move into ~/.pydfs
+    os.path.join(os.environ["HOME"], ".pydfs", "master.sqlite"),
     check_same_thread=False,
 )
 cur = conn.cursor()
