@@ -1,25 +1,29 @@
-from arg_parse import parse_args
-from logger import _logger
+# TODO: remove it
+import sys
+
+sys.path.append(".")
+
+from pydfs.arg_parse import parse_args  # noqa: E402
+from pydfs.cmd_init import cmd_init_master, cmd_init_slave  # noqa: E402
+from pydfs.logger import _logger  # noqa: E402
 
 if __name__ == "__main__":
 
     args = parse_args()
-    _logger.info(f"CLI arguments: {args}")
+    _logger.debug(f"CLI arguments: {args}")
 
     if args.command == "init":
 
-        if args.node == "master":
-            _logger.info(f"pydfs init --node {args.node}")
-            # TODO
+        if args.subcommand == "master":
+            _logger.info(f"pydfs init {args.subcommand}")
+            cmd_init_master()
 
-        elif args.node == "slave":
-            _logger.info(f"pydfs init --node {args.node}")
-            # TODO
+        elif args.subcommand == "slave":
+            _logger.info(f"pydfs init {args.subcommand} --master_ip {args.master_ip}")
+            cmd_init_slave(master_ip=args.master_ip)
 
         else:
-            err_msg = (
-                f"unknown init --node argument: '{args.node}' (use 'master' or 'slave')"
-            )
+            err_msg = f"unknown init subcommand: '{args.subcommand}' (use 'master' or 'slave')"
             _logger.error(err_msg)
             raise ValueError(err_msg)
 
@@ -43,4 +47,4 @@ if __name__ == "__main__":
     else:
         err_msg = f"unknown command: '{args.command}' (use 'init' or 'dfs')"
         _logger.error(err_msg)
-        raise ValueError(err_msg)  # TODO: move into arg_parse
+        raise ValueError(err_msg)
