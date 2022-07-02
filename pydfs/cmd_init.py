@@ -1,11 +1,10 @@
-import os
 import sys  # TODO: remove it
 
 import requests  # type: ignore
 
 sys.path.append(".")
 from pydfs.logger import _logger  # noqa: E402
-from pydfs.utils import _ping  # noqa: E402
+from pydfs.utils import ping, mkdir_pydfs  # noqa: E402
 
 
 # TODO: make daemon from it
@@ -32,19 +31,22 @@ def cmd_init_slave(master_ip: str) -> None:
         master_ip (str): pydfs master node IP.
     """
 
-    # mkdir ~/.pydfs
     # TODO: maybe change order
-    path = os.path.join(os.environ["HOME"], ".pydfs")
-    if not os.path.exists(path):
-        os.makedirs(path, exist_ok=False)
-        _logger.info(f"'{path}' folder created")
-    else:
-        # TODO: think about workflow (behaviour)
-        _logger.info(f"'{path}' folder has already been created")
+    mkdir_pydfs()
+    _ping_master_node(master_ip=master_ip)
+    _send_slave_ip_to_master(master_ip=master_ip)
 
-    # ping master node
-    # TODO: save pydfs init info, for example master_ip for slave nodes
-    if _ping(master_ip):
+
+# TODO: save pydfs init info, for example master_ip for slave nodes
+def _ping_master_node(master_ip: str) -> None:
+    """
+    Function to ping master node by its IP.
+
+    Args:
+        master_ip (str): pydfs master node IP.
+    """
+
+    if ping(master_ip):
         _logger.info(f"master node '{master_ip}' was found")
     else:
         # TODO: make more informative error message
@@ -52,7 +54,15 @@ def cmd_init_slave(master_ip: str) -> None:
         _logger.error(err_msg)
         raise ConnectionError(err_msg)
 
-    # TODO: name phase
+
+def _send_slave_ip_to_master(master_ip: str) -> None:
+    """
+    Function to sent slave node IP to master node.
+
+    Args:
+        master_ip (str): pydfs master node IP.
+    """
+
     # TODO: add https
     # TODO: remove port hardcode (parametrize)
     # TODO: maybe post request, not put

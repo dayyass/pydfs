@@ -8,9 +8,13 @@ from flask_restful import Api, Resource  # TODO: maybe use just flask
 
 sys.path.append(".")
 from pydfs.logger import _logger  # noqa: E402
+from pydfs.utils import mkdir_pydfs
 
 app = Flask(__name__)
 api = Api(app)
+
+
+mkdir_pydfs()
 
 # database
 # TODO: use ORM
@@ -19,7 +23,7 @@ api = Api(app)
 # TODO: come up with behaviour when db already exists
 # TODO: maybe parametrize db address
 # TODO: remove check_same_thread=False
-_logger.info("creating master.sqlite")
+_logger.info("creating master.sqlite (~/.pydfs)")
 conn = sqlite3.connect(
     os.path.join(os.environ["HOME"], ".pydfs", "master.sqlite"),
     check_same_thread=False,
