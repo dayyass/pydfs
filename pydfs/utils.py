@@ -17,6 +17,8 @@ def _ping(hostname: str) -> bool:
     _logger.debug(f"ping command: {cmd}")
 
     response = os.system(cmd)
+    _logger.debug(f"ping response code: {response}")
+
     success = not bool(response)
 
     return success

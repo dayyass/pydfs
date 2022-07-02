@@ -25,7 +25,7 @@ def cmd_init_master() -> None:
 # TODO: check if master and slave are already connected
 def cmd_init_slave(master_ip: str) -> None:
     """
-    pydfs init slave
+    pydfs init slave --master_ip ...
 
     Args:
         master_ip (str): pydfs master node IP.
