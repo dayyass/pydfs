@@ -12,3 +12,6 @@
 
 venv
 .idea
+
+master.sqlite
+master.sqlite-journal

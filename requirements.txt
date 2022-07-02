@@ -1,1 +1,4 @@
+flask==2.1.2
+flask-restful==0.3.9
 pre-commit==2.19.0  # dev
+requests==2.28.1
