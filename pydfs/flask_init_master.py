@@ -19,7 +19,10 @@ api = Api(app)
 # TODO: maybe parametrize db address
 # TODO: remove check_same_thread=False
 _logger.info("creating master.sqlite")
-conn = sqlite3.connect("master.sqlite", check_same_thread=False)
+conn = sqlite3.connect(
+    "master.sqlite",  # TODO: move into ~/.pydfs
+    check_same_thread=False,
+)
 cur = conn.cursor()
 
 _logger.info("creating slave table in master.sqlite")

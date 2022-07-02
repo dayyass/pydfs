@@ -1,12 +1,23 @@
 # pydfs
 Distributed File System written in Python
 
-### CLI Interface:
+### Installation
+```
+git clone https://github.com/silkway-ai/pydfs.git
+cd pydfs
+pip install .
+```
+
+### Usage:
+pydfs supports command line interface (CLI)
 
 #### init commands
-- `python pydfs init master`
-- `python pydfs init slave --master_ip 127.0.0.1`
+- `pydfs init master`
+- `pydfs init slave --master_ip 127.0.0.1`
 
 #### dfs commands
-- `python pydfs dfs put --path PATH`
-- `python pydfs dfs get --path PATH`
+- `pydfs dfs put --path PATH`
+- `pydfs dfs get --path PATH`
+
+### Requirements
+Python >= 3.7
