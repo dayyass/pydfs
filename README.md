@@ -1,4 +1,4 @@
-# pydfs
+# PyDFS
 Distributed File System written in Python
 
 ### Installation
@@ -9,7 +9,7 @@ pip install .
 ```
 
 ### Usage:
-pydfs supports command line interface (CLI)
+PyDFS supports command line interface (CLI)
 
 #### init commands
 - `pydfs init master`
