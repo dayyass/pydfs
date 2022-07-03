@@ -6,7 +6,7 @@ Distributed File System written in Python.
 pip install pydfs
 ```
 
-## Usage:
+## Usage
 PyDFS is Centralized Distributed File System, which means there is a *master* and *slave* nodes.
 The current implementation assumes that the system has only one master node and many slave nodes.
 
