@@ -70,15 +70,15 @@ def _info() -> None:
     # TODO: maybe allow master and slave node at the same time
     if os.path.exists(path_to_master_db):
         # TODO: add slave nodes info
-        print("pydfs master node")
+        print("pydfs master node\n")
     elif os.path.exists(path_to_pydfs):
         # TODO: add master node info
-        print("pydfs slave node")
+        print("pydfs slave node\n")
     else:
         msg = (
             "not a pydfs node\n"
             "init it as a master node with `pydfs init master` or\n"
-            "init it as a slave node with `pydfs init slave --master_ip [IP]`"
+            "init it as a slave node with `pydfs init slave --master_ip [IP]`\n"
         )
         print(msg)
 

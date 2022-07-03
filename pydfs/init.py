@@ -21,7 +21,7 @@ def cmd_init_master() -> None:
     from pydfs.init_master_app import app  # noqa: E402
 
     _logger.info("master node initialized successfully")
-    app.run()
+    app.run()  # TODO: add WSGI (e.g. gunicorn)
 
 
 # TODO: think how to match existed slave to master
