@@ -18,7 +18,7 @@ def cmd_init_master() -> None:
 
     # TODO: maybe move it up
     # TODO: validate if import is correct
-    from pydfs.flask_init_master import app  # noqa: E402
+    from pydfs.init_master_app import app  # noqa: E402
 
     _logger.info("master node initialized successfully")
     app.run()

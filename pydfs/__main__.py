@@ -3,7 +3,7 @@ import sys
 
 sys.path.append(".")
 from pydfs.arg_parse import parse_args  # noqa: E402
-from pydfs.cmd_init import cmd_init_master, cmd_init_slave  # noqa: E402
+from pydfs.init import cmd_init_master, cmd_init_slave  # noqa: E402
 from pydfs.logger import _logger  # noqa: E402
 
 
