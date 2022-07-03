@@ -34,4 +34,4 @@ jobs:
     - name: Code format check with flake8
       run: flake8 --ignore E501,E203,W503 .
     - name: Type check with mypy
-      run: mypy .
+      run: mypy --ignore-missing-imports .
