@@ -1,5 +1,5 @@
-# TODO: remove it
-import sys
+import os
+import sys  # TODO: remove it
 
 sys.path.append(".")
 from pydfs.arg_parse import parse_args  # noqa: E402
@@ -13,6 +13,11 @@ def main() -> None:
     """
 
     args = parse_args()
+
+    if args.info and (not args.command):
+        _info()
+        return
+
     _logger.debug(f"CLI arguments: {args}")
 
     if args.command == "init":
@@ -51,6 +56,31 @@ def main() -> None:
         err_msg = f"unknown command: '{args.command}' (use 'init' or 'dfs')"
         _logger.error(err_msg)
         raise ValueError(err_msg)
+
+
+def _info() -> None:
+    """
+    pydfs --info
+    """
+
+    path_to_pydfs = os.path.join(os.environ["HOME"], ".pydfs")
+    path_to_master_db = os.path.join(path_to_pydfs, "master.sqlite")
+
+    # TODO: maybe not use print
+    # TODO: maybe allow master and slave node at the same time
+    if os.path.exists(path_to_master_db):
+        # TODO: add slave nodes info
+        print("pydfs master node")
+    elif os.path.exists(path_to_pydfs):
+        # TODO: add master node info
+        print("pydfs slave node")
+    else:
+        msg = (
+            "not a pydfs node\n"
+            "init it as a master node with `pydfs init master` or\n"
+            "init it as a slave node with `pydfs init slave --master_ip [IP]`"
+        )
+        print(msg)
 
 
 if __name__ == "__main__":

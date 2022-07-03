@@ -17,7 +17,9 @@ api = Api(app)
 # TODO: come up with behaviour when db already exists
 # TODO: add db admin user with password
 # TODO: create normal workflow if slave IP already in db
+_logger.info("creating master.sqlite in ~/.pydfs")
 uri = f"sqlite:///{os.path.join(os.environ['HOME'], '.pydfs', 'master.sqlite')}"
+
 app.config["SQLALCHEMY_DATABASE_URI"] = uri
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False  # TODO: validate
 db = SQLAlchemy(app)
@@ -36,7 +38,6 @@ class Slave(db.Model):  # type: ignore
         return f"<Slave {self.ip_address}>"
 
 
-_logger.info("creating master.sqlite in ~/.pydfs")
 _logger.info("creating slave table in master.sqlite")
 db.create_all()
 

@@ -20,6 +20,12 @@ def parse_args() -> argparse.Namespace:
         "--version",
         action="version",
         version=f"%(prog)s v{__version__}",
+        help="pydfs version",
+    )
+    parser.add_argument(
+        "--info",
+        action="store_true",
+        help="pydfs node info",
     )
 
     # https://stackoverflow.com/questions/8250010/argparse-identify-which-subparser-was-used

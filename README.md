@@ -20,11 +20,15 @@ Let's take a closer look at these commands.
 ### init commands
 With `pydfs init` command you can initialize master and slave nodes - it's pretty simple:
 - `pydfs init master`
-- `pydfs init slave --master_ip 127.0.0.1`
+- `pydfs init slave --master_ip [IP]`
 
 ### dfs commands
 - `pydfs dfs put --path PATH`
 - `pydfs dfs get --path PATH`
+
+### other commands
+- `pydfs --version`
+- `pydfs --info`
 
 ## Requirements
 Python >= 3.7
