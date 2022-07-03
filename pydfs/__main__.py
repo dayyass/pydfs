@@ -1,21 +1,23 @@
+import argparse
 import os
 import sys  # TODO: remove it
 
 sys.path.append(".")
-from pydfs.arg_parse import parse_args  # noqa: E402
+from pydfs.arg_parse import get_argparse  # noqa: E402
 from pydfs.init import cmd_init_master, cmd_init_slave  # noqa: E402
 from pydfs.logger import _logger  # noqa: E402
 
 
-def main() -> int:
+def main(args: argparse.Namespace) -> int:
     """
     pydfs main function (entry point)
+
+    Args:
+        args (argparse.Namespace): CLI arguments.
 
     Returns:
         int: exit code.
     """
-
-    args = parse_args()
 
     if args.info and (not args.command):
         _info()
@@ -89,4 +91,5 @@ def _info() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    args = get_argparse().parse_args()
+    main(args)
