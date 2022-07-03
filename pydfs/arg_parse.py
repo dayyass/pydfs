@@ -1,8 +1,4 @@
 import argparse
-import sys  # TODO: remove it
-
-sys.path.append(".")
-from pydfs import __version__  # noqa: E402
 
 
 def get_argparse() -> argparse.ArgumentParser:
@@ -18,8 +14,7 @@ def get_argparse() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--version",
-        action="version",
-        version=f"%(prog)s v{__version__}",
+        action="store_true",
         help="pydfs version",
     )
     parser.add_argument(

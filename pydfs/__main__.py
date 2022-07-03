@@ -3,12 +3,22 @@ import os
 import sys  # TODO: remove it
 
 sys.path.append(".")
+from pydfs import __version__  # noqa: E402
 from pydfs.arg_parse import get_argparse  # noqa: E402
 from pydfs.init import cmd_init_master, cmd_init_slave  # noqa: E402
 from pydfs.logger import _logger  # noqa: E402
 
 
-def main(args: argparse.Namespace) -> int:
+def main() -> None:
+    """
+    pydfs main function (entry point)
+    """
+
+    args = get_argparse().parse_args()
+    _main(args)
+
+
+def _main(args: argparse.Namespace) -> int:
     """
     pydfs main function (entry point)
 
@@ -18,6 +28,10 @@ def main(args: argparse.Namespace) -> int:
     Returns:
         int: exit code.
     """
+
+    if args.version and (not args.command):
+        _version()
+        return 0
 
     if args.info and (not args.command):
         _info()
@@ -65,6 +79,15 @@ def main(args: argparse.Namespace) -> int:
     return 0
 
 
+def _version() -> None:
+    """
+    pydfs --version
+    """
+
+    # TODO: maybe not use print
+    print(f"v{__version__}")
+
+
 def _info() -> None:
     """
     pydfs --info
@@ -91,5 +114,4 @@ def _info() -> None:
 
 
 if __name__ == "__main__":
-    args = get_argparse().parse_args()
-    main(args)
+    main()
