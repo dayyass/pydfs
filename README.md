@@ -1,5 +1,5 @@
 # PyDFS
-Distributed File System written in Python
+Distributed File System written in Python.
 
 ## Installation
 ```
