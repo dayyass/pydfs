@@ -1,4 +1,8 @@
 import argparse
+import sys  # TODO: remove it
+
+sys.path.append(".")
+from pydfs import __version__  # noqa: E402
 
 
 def parse_args() -> argparse.Namespace:
@@ -9,10 +13,14 @@ def parse_args() -> argparse.Namespace:
         argparse.Namespace: CLI arguments.
     """
 
-    # TODO: add --version argument
     # TODO: add --info argument
     # TODO: add login
     parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s v{__version__}",
+    )
 
     # https://stackoverflow.com/questions/8250010/argparse-identify-which-subparser-was-used
     subparsers = parser.add_subparsers(dest="command")
