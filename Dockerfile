@@ -1,5 +1,5 @@
 FROM python:3.7-slim-buster
-MAINTAINER Dani El-Ayyass <dayyass@yandex.ru>
+LABEL maintainer = "Dani El-Ayyass <dayyass@yandex.ru>"
 
 WORKDIR /workdir
 COPY . .
