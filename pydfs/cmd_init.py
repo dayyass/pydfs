@@ -1,10 +1,11 @@
+import os
 import sys  # TODO: remove it
 
 import requests  # type: ignore
 
 sys.path.append(".")
 from pydfs.logger import _logger  # noqa: E402
-from pydfs.utils import ping, mkdir_pydfs  # noqa: E402
+from pydfs.utils import ping  # noqa: E402
 
 
 # TODO: make daemon from it
@@ -13,12 +14,14 @@ def cmd_init_master() -> None:
     pydfs init master
     """
 
+    _mkdir_pydfs()
+
     # TODO: maybe move it up
     # TODO: validate if import is correct
     from pydfs.flask_init_master import app  # noqa: E402
 
     _logger.info("master node initialized successfully")
-    app.run(debug=True)  # TODO: remove debug
+    app.run()
 
 
 # TODO: think how to match existed slave to master
@@ -32,9 +35,23 @@ def cmd_init_slave(master_ip: str) -> None:
     """
 
     # TODO: maybe change order
-    mkdir_pydfs()
+    _mkdir_pydfs()
     _ping_master_node(master_ip=master_ip)
     _send_slave_ip_to_master(master_ip=master_ip)
+
+
+def _mkdir_pydfs() -> None:
+    """
+    Create pydfs working directory ~/.pydfs
+    """
+
+    path = os.path.join(os.environ["HOME"], ".pydfs")
+    if not os.path.exists(path):
+        os.makedirs(path, exist_ok=False)
+        _logger.info(f"'{path}' folder created")
+    else:
+        # TODO: think about workflow (behaviour)
+        _logger.info(f"'{path}' folder has already been created")
 
 
 # TODO: save pydfs init info, for example master_ip for slave nodes
@@ -68,7 +85,7 @@ def _send_slave_ip_to_master(master_ip: str) -> None:
     # TODO: maybe post request, not put
     # TODO: send local api for validation
     response = requests.put(
-        f"http://{master_ip}:5000/add_slave_node",
+        f"http://{master_ip}:5000/add_slave",
         data={},  # TODO: validate
     )
 
