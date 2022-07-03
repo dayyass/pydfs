@@ -7,16 +7,19 @@ from pydfs.init import cmd_init_master, cmd_init_slave  # noqa: E402
 from pydfs.logger import _logger  # noqa: E402
 
 
-def main() -> None:
+def main() -> int:
     """
     pydfs main function (entry point)
+
+    Returns:
+        int: exit code.
     """
 
     args = parse_args()
 
     if args.info and (not args.command):
         _info()
-        return
+        return 0
 
     _logger.debug(f"CLI arguments: {args}")
 
@@ -56,6 +59,8 @@ def main() -> None:
         err_msg = f"unknown command: '{args.command}' (use 'init' or 'dfs')"
         _logger.error(err_msg)
         raise ValueError(err_msg)
+
+    return 0
 
 
 def _info() -> None:
