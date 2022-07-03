@@ -30,5 +30,19 @@ With `pydfs init` command you can initialize master and slave nodes - it's prett
 - `pydfs --version`
 - `pydfs --info`
 
+## Docker
+You can use PyDFS with Docker.
+
+To build a docker image with PyDFS run:
+```docker
+docker build -t pydfs .
+```
+<!-- TODO: push image to Docker Hub -->
+
+To run a docker container with PyDFS run:
+```
+docker run -it pydfs
+```
+
 ## Requirements
 Python >= 3.7
