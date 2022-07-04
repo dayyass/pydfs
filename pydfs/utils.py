@@ -5,20 +5,6 @@ sys.path.append(".")
 from pydfs.logger import _logger  # noqa: E402
 
 
-def mkdir_pydfs() -> None:
-    """
-    Create pydfs working directory ~/.pydfs
-    """
-
-    path = os.path.join(os.environ["HOME"], ".pydfs")
-    if not os.path.exists(path):
-        os.makedirs(path, exist_ok=False)
-        _logger.info(f"'{path}' folder created")
-    else:
-        # TODO: think about workflow (behaviour)
-        _logger.info(f"'{path}' folder has already been created")
-
-
 # TODO: use with IP
 # TODO: validate
 # TODO: maybe rename hostname

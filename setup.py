@@ -18,6 +18,7 @@ setup(
     install_requires=[
         "flask==2.1.2",
         "flask-restful==0.3.9",
+        "flask-sqlalchemy==2.5.1",
         "requests==2.28.1",
     ],
     keywords=[

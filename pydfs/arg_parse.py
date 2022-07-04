@@ -11,6 +11,7 @@ def parse_args() -> argparse.Namespace:
 
     # TODO: add --version argument
     # TODO: add --info argument
+    # TODO: add login
     parser = argparse.ArgumentParser()
 
     # https://stackoverflow.com/questions/8250010/argparse-identify-which-subparser-was-used
