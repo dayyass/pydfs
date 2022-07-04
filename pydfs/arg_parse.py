@@ -9,6 +9,8 @@ def parse_args() -> argparse.Namespace:
         argparse.Namespace: CLI arguments.
     """
 
+    # TODO: add --version argument
+    # TODO: add --info argument
     parser = argparse.ArgumentParser()
 
     # https://stackoverflow.com/questions/8250010/argparse-identify-which-subparser-was-used

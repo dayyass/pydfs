@@ -2,12 +2,15 @@
 import sys
 
 sys.path.append(".")
-
 from pydfs.arg_parse import parse_args  # noqa: E402
 from pydfs.cmd_init import cmd_init_master, cmd_init_slave  # noqa: E402
 from pydfs.logger import _logger  # noqa: E402
 
-if __name__ == "__main__":
+
+def main() -> None:
+    """
+    pydfs main function (entry point)
+    """
 
     args = parse_args()
     _logger.debug(f"CLI arguments: {args}")
@@ -48,3 +51,7 @@ if __name__ == "__main__":
         err_msg = f"unknown command: '{args.command}' (use 'init' or 'dfs')"
         _logger.error(err_msg)
         raise ValueError(err_msg)
+
+
+if __name__ == "__main__":
+    main()
