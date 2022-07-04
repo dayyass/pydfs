@@ -1,16 +1,12 @@
 import argparse
-import sys  # TODO: remove it
-
-sys.path.append(".")
-from pydfs import __version__  # noqa: E402
 
 
-def parse_args() -> argparse.Namespace:
+def get_argparse() -> argparse.ArgumentParser:
     """
-    Function to get CLI arguments.
+    Function to get CLI arguments parser.
 
     Returns:
-        argparse.Namespace: CLI arguments.
+        argparse.ArgumentParser: CLI arguments parser.
     """
 
     # TODO: add --info argument
@@ -18,8 +14,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--version",
-        action="version",
-        version=f"%(prog)s v{__version__}",
+        action="store_true",
         help="pydfs version",
     )
     parser.add_argument(
@@ -87,4 +82,4 @@ def parse_args() -> argparse.Namespace:
         help="path to pydfs file to get it locally",
     )
 
-    return parser.parse_args()
+    return parser

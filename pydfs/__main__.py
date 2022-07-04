@@ -1,8 +1,10 @@
+import argparse
 import os
 import sys  # TODO: remove it
 
 sys.path.append(".")
-from pydfs.arg_parse import parse_args  # noqa: E402
+from pydfs import __version__  # noqa: E402
+from pydfs.arg_parse import get_argparse  # noqa: E402
 from pydfs.init import cmd_init_master, cmd_init_slave  # noqa: E402
 from pydfs.logger import _logger  # noqa: E402
 
@@ -12,11 +14,28 @@ def main() -> None:
     pydfs main function (entry point)
     """
 
-    args = parse_args()
+    args = get_argparse().parse_args()
+    _main(args)
+
+
+def _main(args: argparse.Namespace) -> int:
+    """
+    pydfs main function (entry point)
+
+    Args:
+        args (argparse.Namespace): CLI arguments.
+
+    Returns:
+        int: exit code.
+    """
+
+    if args.version and (not args.command):
+        _version()
+        return 0
 
     if args.info and (not args.command):
         _info()
-        return
+        return 0
 
     _logger.debug(f"CLI arguments: {args}")
 
@@ -56,6 +75,17 @@ def main() -> None:
         err_msg = f"unknown command: '{args.command}' (use 'init' or 'dfs')"
         _logger.error(err_msg)
         raise ValueError(err_msg)
+
+    return 0
+
+
+def _version() -> None:
+    """
+    pydfs --version
+    """
+
+    # TODO: maybe not use print
+    print(f"v{__version__}")
 
 
 def _info() -> None:
