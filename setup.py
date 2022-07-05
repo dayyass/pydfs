@@ -11,7 +11,7 @@ setup(
     description="Distributed File System written in Python",
     long_description=long_description,
     author="Dani El-Ayyass, Artem Fomin",
-    author_email="dayyass@yandex.ru",
+    author_email="dayyass@yandex.ru, artfom02@gmail.com",
     url="https://github.com/silkway-ai/pydfs",
     packages=["pydfs"],
     entry_points={"console_scripts": ["pydfs = pydfs.__main__:main"]},

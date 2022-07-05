@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  master_node:
+    container_name: master_node
+    build: .
+    command: pydfs init master
+  slave_node_1:
+    container_name: slave_node_1
+    build: .
+    command: bash -c "pydfs init slave --master_ip master_node && tail -f /dev/null"
+    depends_on:
+      - master_node
+  slave_node_2:
+    container_name: slave_node_2
+    build: .
+    command: bash -c "pydfs init slave --master_ip master_node && tail -f /dev/null"
+    depends_on:
+      - master_node

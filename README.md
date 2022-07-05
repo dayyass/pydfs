@@ -44,5 +44,11 @@ To run a docker container with PyDFS run:
 docker run -it pydfs
 ```
 
+### Docker Compose
+You can also use *docker-compose* to run multi-container application with one master node and two slave nodes.
+```
+docker-compose up --build
+```
+
 ## Requirements
 Python >= 3.7
