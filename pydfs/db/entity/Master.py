@@ -25,9 +25,11 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False  # TODO: validate
 db = SQLAlchemy(app)
 
 
-class Slave(db.Model):  # type: ignore
+# TODO: maybe rewrite inheritance into repository and remain only class with fields and methods?
+# TODO: fix class structue because it's just a copypaste of Slave class
+class Master(db.Model):  # type: ignore
 
-    __tablename__ = "slave"  # TODO: check the need
+    __tablename__ = "master"  # TODO: check the need
     # __table_args__ = {"extend_existing": True}  # TODO: check it
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -35,30 +37,4 @@ class Slave(db.Model):  # type: ignore
     timestamp = db.Column(db.String(23), unique=False, nullable=False)
 
     def __repr__(self):
-        return f"<Slave {self.ip_address}>"
-
-
-_logger.info("creating slave table in master.sqlite")
-db.create_all()
-
-
-# TODO: implement this as method in SlaveService with logs etc and in SlaveRepostitory (only database-request)
-class AddSlave(Resource):
-
-    def put(self):
-        # https://stackoverflow.com/questions/3759981/get-ip-address-of-visitors-using-flask-for-python
-        _logger.info(
-            f"inserting slave node address {request.remote_addr} in master.sqlite"
-        )
-
-        slave = Slave(
-            ip_address=request.remote_addr,
-            timestamp=datetime.now().strftime(r"%Y-%m-%d %H:%M:%S.%f")[:-3],
-        )
-        db.session.add(slave)
-        db.session.commit()
-
-        return {}  # TODO: validate
-
-
-api.add_resource(AddSlave, "/add_slave")
+        return f"<Master {self.ip_address}>"

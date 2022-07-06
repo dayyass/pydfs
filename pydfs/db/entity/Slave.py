@@ -25,6 +25,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False  # TODO: validate
 db = SQLAlchemy(app)
 
 
+# TODO: maybe rewrite inheritance into repository and remain only class with fields and methods?
 class Slave(db.Model):  # type: ignore
 
     __tablename__ = "slave"  # TODO: check the need
@@ -36,29 +37,3 @@ class Slave(db.Model):  # type: ignore
 
     def __repr__(self):
         return f"<Slave {self.ip_address}>"
-
-
-_logger.info("creating slave table in master.sqlite")
-db.create_all()
-
-
-# TODO: implement this as method in SlaveService with logs etc and in SlaveRepostitory (only database-request)
-class AddSlave(Resource):
-
-    def put(self):
-        # https://stackoverflow.com/questions/3759981/get-ip-address-of-visitors-using-flask-for-python
-        _logger.info(
-            f"inserting slave node address {request.remote_addr} in master.sqlite"
-        )
-
-        slave = Slave(
-            ip_address=request.remote_addr,
-            timestamp=datetime.now().strftime(r"%Y-%m-%d %H:%M:%S.%f")[:-3],
-        )
-        db.session.add(slave)
-        db.session.commit()
-
-        return {}  # TODO: validate
-
-
-api.add_resource(AddSlave, "/add_slave")
