@@ -2,6 +2,8 @@ import argparse
 import os
 import sys  # TODO: remove it
 
+import requests
+
 sys.path.append(".")
 from pydfs import __version__  # noqa: E402
 from pydfs.arg_parse import get_argparse  # noqa: E402
@@ -39,6 +41,8 @@ def _main(args: argparse.Namespace) -> int:
 
     _logger.debug(f"CLI arguments: {args}")
 
+    master_ip = ""
+
     if args.command == "init":
 
         if args.subcommand == "master":
@@ -48,6 +52,7 @@ def _main(args: argparse.Namespace) -> int:
         elif args.subcommand == "slave":
             _logger.info(f"pydfs init {args.subcommand} --master_ip {args.master_ip}")
             cmd_init_slave(master_ip=args.master_ip)
+            master_ip = args.master_ip
 
         else:
             err_msg = f"unknown init subcommand: '{args.subcommand}' (use 'master' or 'slave')"
@@ -58,11 +63,13 @@ def _main(args: argparse.Namespace) -> int:
 
         if args.subcommand == "put":
             _logger.info(f"pydfs dfs put --path {args.path}")
-            # TODO
+            file = args.path
+            requests.post(url=f"http/{master_ip}/.pydfs", data=file)
 
         elif args.subcommand == "get":
             _logger.info(f"pydfs dfs get --path {args.path}")
-            # TODO
+            file = args.path
+            requests.post(url=f"http/{master_ip}/.pydfs", data=file)
 
         else:
             err_msg = (

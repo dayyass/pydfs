@@ -1,10 +1,14 @@
 import os
 import sys  # TODO: remove it
 from datetime import datetime
+import random
 
 from flask import Flask, request
 from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import session
+import requests
+
 
 sys.path.append(".")
 from pydfs.logger import _logger  # noqa: E402
@@ -60,3 +64,29 @@ class AddSlave(Resource):
 
 
 api.add_resource(AddSlave, "/add_slave")
+
+
+@app.route('/post')
+def post():
+
+    file = request.args.get('path')
+    node_id = random.randrange(start=1, stop=2, step=1)
+
+    save_node = session.query(Slave).filter(Slave.id == node_id).one()
+    requests.post(url=f"http/{save_node.ip}/.pydfs", data=file)
+
+
+@app.route('/get')
+def get():
+
+    file_name = request.args.get('path')
+
+    for node_id in range(1, 2):
+
+        save_node = session.query(Slave).filter(Slave.id == node_id).one()
+        response = requests.get(url=f"http/{save_node.ip}/.pydfs/{file_name}")
+
+        if int(response.status_code) == 200:  # TODO: not sure about this
+            return response
+
+    _logger.info(f"File {file_name} wasn't found")
