@@ -21,7 +21,10 @@ def cmd_init_master() -> None:
     from pydfs.init_master_app import app  # noqa: E402
 
     _logger.info("master node initialized successfully")
-    app.run()  # TODO: add WSGI (e.g. gunicorn)
+
+    # TODO: add WSGI (e.g. gunicorn)
+    # TODO: remove host="0.0.0.0"
+    app.run(host="0.0.0.0")
 
 
 # TODO: think how to match existed slave to master
@@ -36,7 +39,7 @@ def cmd_init_slave(master_ip: str) -> None:
 
     # TODO: maybe change order
     _mkdir_pydfs()
-    _ping_master_node(master_ip=master_ip)
+    # _ping_master_node(master_ip=master_ip)  # TODO: fix with docker-compose
     _send_slave_ip_to_master(master_ip=master_ip)
 
 
