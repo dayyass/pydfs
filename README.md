@@ -23,8 +23,8 @@ With `pydfs init` command you can initialize master and slave nodes - it's prett
 - `pydfs init slave --master_ip [IP]`
 
 ### dfs commands
-- `pydfs dfs put --path PATH`
-- `pydfs dfs get --path PATH`
+- `pydfs dfs put --path PATH --master_ip [IP]`
+- `pydfs dfs get --path PATH --master_ip [IP]`
 
 ### other commands
 - `pydfs --version`
