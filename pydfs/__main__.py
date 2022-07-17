@@ -5,6 +5,7 @@ import sys  # TODO: remove it
 sys.path.append(".")
 from pydfs import __version__  # noqa: E402
 from pydfs.arg_parse import get_argparse  # noqa: E402
+from pydfs.dfs import cmd_dfs_get_request, cmd_dfs_put_request  # noqa: E402
 from pydfs.init import cmd_init_master, cmd_init_slave  # noqa: E402
 from pydfs.logger import _logger  # noqa: E402
 
@@ -57,12 +58,26 @@ def _main(args: argparse.Namespace) -> int:
     elif args.command == "dfs":
 
         if args.subcommand == "put":
-            _logger.info(f"pydfs dfs put --path {args.path}")
-            # TODO
+            _logger.info(
+                f"pydfs dfs put --path {args.path} --master_ip {args.master_ip}"
+            )
+            cmd_dfs_put_request(
+                ip=args.master_ip,
+                files={"upload_file": open(args.path, mode="rb")},
+            )
+            # TODO add error handler
+            _logger.info(f"putting file {args.path} to pydfs succeeded")
 
         elif args.subcommand == "get":
-            _logger.info(f"pydfs dfs get --path {args.path}")
-            # TODO
+            _logger.info(
+                f"pydfs dfs get --path {args.path} --master_ip {args.master_ip}"
+            )
+            cmd_dfs_get_request(
+                ip=args.master_ip,
+                path=args.path,
+            )
+            # TODO add error handler
+            _logger.info(f"getting file {args.path} from pydfs succeeded")
 
         else:
             err_msg = (

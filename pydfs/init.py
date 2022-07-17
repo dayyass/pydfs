@@ -42,6 +42,16 @@ def cmd_init_slave(master_ip: str) -> None:
     # _ping_master_node(master_ip=master_ip)  # TODO: fix with docker-compose
     _send_slave_ip_to_master(master_ip=master_ip)
 
+    # TODO: maybe move it up
+    # TODO: validate if import is correct
+    from pydfs.init_slave_app import app  # noqa: E402
+
+    _logger.info("slave node initialized successfully")
+
+    # TODO: add WSGI (e.g. gunicorn)
+    # TODO: remove host="0.0.0.0"
+    app.run(host="0.0.0.0")
+
 
 def _mkdir_pydfs() -> None:
     """
@@ -93,7 +103,7 @@ def _send_slave_ip_to_master(master_ip: str) -> None:
     )
 
     if response.status_code == 200:
-        _logger.info("slave node initialized successfully")
+        _logger.info("successfully send ip to master")
     else:
         try:  # TODO: fix try/except block
             _logger.debug(f"response json keys: {response.json().keys()}")

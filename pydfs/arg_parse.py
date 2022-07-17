@@ -69,6 +69,13 @@ def get_argparse() -> argparse.ArgumentParser:
         required=True,
         help="path to local file to put in pydfs",
     )
+    # TODO: remove master_ip
+    subsubparser_dfs_put.add_argument(
+        "--master_ip",
+        type=str,
+        required=True,
+        help="pydfs master node IP",
+    )
 
     # dfs get command
     subsubparser_dfs_get = subsubparsers_dfs.add_parser(
@@ -80,6 +87,13 @@ def get_argparse() -> argparse.ArgumentParser:
         type=str,
         required=True,
         help="path to pydfs file to get it locally",
+    )
+    # TODO: remove master_ip
+    subsubparser_dfs_get.add_argument(
+        "--master_ip",
+        type=str,
+        required=True,
+        help="pydfs master node IP",
     )
 
     return parser
