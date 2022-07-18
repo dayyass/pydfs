@@ -12,3 +12,8 @@
 
 venv
 .idea
+
+master.sqlite
+master.sqlite-journal
+
+pydfs.egg-info

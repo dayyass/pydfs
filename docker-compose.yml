@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+
+  master_node:
+    container_name: master_node
+    build: .
+    command: pydfs init master
+
+  slave_node_1:
+    container_name: slave_node_1
+    build: .
+    command: bash -c "./wait-for-it.sh master_node:5000 && pydfs init slave --master_ip master_node"
+    depends_on:
+      - master_node
+
+  slave_node_2:
+    container_name: slave_node_2
+    build: .
+    command: bash -c "./wait-for-it.sh master_node:5000 && pydfs init slave --master_ip master_node"
+    depends_on:
+      - master_node
+
+  user_node_1:
+    container_name: user_node_1
+    build: .
+    command: bash -c "./wait-for-it.sh master_node:5000 && ./wait-for-it.sh slave_node_1:5000 && ./wait-for-it.sh slave_node_2:5000 && pydfs dfs put --path wait-for-it.sh --master_ip master_node && tail -f /dev/null"
+    depends_on:
+      - master_node
+      - slave_node_1
+      - slave_node_2
+
+  user_node_2:
+    container_name: user_node_2
+    build: .
+    command: tail -f /dev/null
+    depends_on:
+      - master_node
+      - slave_node_1
+      - slave_node_2
+      - user_node_1
