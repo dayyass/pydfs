@@ -5,8 +5,8 @@ import sys  # TODO: remove it
 sys.path.append(".")
 from pydfs import __version__  # noqa: E402
 from pydfs.arg_parse import get_argparse  # noqa: E402
-from pydfs.dfs import cmd_dfs_get_request, cmd_dfs_put_request  # noqa: E402
-from pydfs.init import cmd_init_master, cmd_init_slave  # noqa: E402
+from pydfs.cmd_dfs import cmd_dfs_get_request, cmd_dfs_put_request  # noqa: E402
+from pydfs.cmd_init import cmd_init_master, cmd_init_slave  # noqa: E402
 from pydfs.logger import _logger  # noqa: E402
 
 

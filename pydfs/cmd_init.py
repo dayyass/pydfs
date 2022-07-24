@@ -18,7 +18,7 @@ def cmd_init_master() -> None:
 
     # TODO: maybe move it up
     # TODO: validate if import is correct
-    from pydfs.init_master_app import app  # noqa: E402
+    from pydfs.master_app import app  # noqa: E402
 
     _logger.info("master node initialized successfully")
 
@@ -44,7 +44,7 @@ def cmd_init_slave(master_ip: str) -> None:
 
     # TODO: maybe move it up
     # TODO: validate if import is correct
-    from pydfs.init_slave_app import app  # noqa: E402
+    from pydfs.slave_app import app  # noqa: E402
 
     _logger.info("slave node initialized successfully")
 
