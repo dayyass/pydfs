@@ -7,7 +7,7 @@ from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
 
 sys.path.append(".")
-from pydfs.dfs import (  # noqa: E402
+from pydfs.cmd_dfs import (  # noqa: E402
     _choose_slave_node,
     cmd_dfs_get_request,
     cmd_dfs_put_request,
