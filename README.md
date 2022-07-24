@@ -52,3 +52,14 @@ docker-compose up --build
 
 ## Requirements
 Python >= 3.7
+
+## Citation
+If you use **PyDFS** in a scientific publication, we would appreciate references to the following BibTex entry:
+```bibtex
+@misc{silkwayai2022pydfs,
+    author       = {Dani El-Ayyass and Artem Fomin},
+    title        = {Distributed File System written in Python},
+    howpublished = {\url{https://github.com/silkway-ai/pydfs}},
+    year         = {2022}
+}
+```
