@@ -17,3 +17,5 @@ master.sqlite
 master.sqlite-journal
 
 pydfs.egg-info
+build/
+dist/
