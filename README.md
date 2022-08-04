@@ -3,7 +3,7 @@ Distributed File System written in Python.
 
 ## Installation
 ```
-pip install pydfs
+pip install py-dfs
 ```
 
 ## Usage
