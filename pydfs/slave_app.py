@@ -1,12 +1,10 @@
 import os
-import sys  # TODO: remove it
 from base64 import b64encode
 
 from flask import Flask, jsonify, request
 from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
 
-sys.path.append(".")
 from pydfs.logger import _logger  # noqa: E402
 
 app = Flask(__name__)

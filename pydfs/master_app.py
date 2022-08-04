@@ -1,12 +1,10 @@
 import os
-import sys  # TODO: remove it
 from datetime import datetime
 
 from flask import Flask, request
 from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
 
-sys.path.append(".")
 from pydfs.cmd_dfs import (  # noqa: E402
     _choose_slave_node,
     cmd_dfs_get_request,

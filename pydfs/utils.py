@@ -1,7 +1,5 @@
 import os
-import sys  # TODO: remove it
 
-sys.path.append(".")
 from pydfs.logger import _logger  # noqa: E402
 
 

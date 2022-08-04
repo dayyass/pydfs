@@ -1,11 +1,9 @@
 import random
-import sys  # TODO: remove it
 from io import BufferedReader
 from typing import Dict, List
 
 import requests  # type: ignore
 
-sys.path.append(".")
 from pydfs.logger import _logger  # noqa: E402
 
 

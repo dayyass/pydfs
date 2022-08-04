@@ -1,9 +1,7 @@
 import os
-import sys  # TODO: remove it
 
 import requests  # type: ignore
 
-sys.path.append(".")
 from pydfs.logger import _logger  # noqa: E402
 from pydfs.utils import ping  # noqa: E402
 

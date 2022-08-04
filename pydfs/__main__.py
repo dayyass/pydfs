@@ -1,9 +1,7 @@
 import argparse
 import os
-import sys  # TODO: remove it
 from base64 import b64decode
 
-sys.path.append(".")
 from pydfs import __version__  # noqa: E402
 from pydfs.arg_parse import get_argparse  # noqa: E402
 from pydfs.cmd_dfs import cmd_dfs_get_request, cmd_dfs_put_request  # noqa: E402
