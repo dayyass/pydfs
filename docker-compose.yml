@@ -10,21 +10,36 @@ services:
   slave_node_1:
     container_name: slave_node_1
     build: .
-    command: bash -c "./wait-for-it.sh master_node:5000 && pydfs init slave --master_ip master_node"
+    command: |
+      bash -c "
+        ./wait-for-it.sh master_node:5000 &&
+        pydfs init slave --master_ip master_node
+      "
     depends_on:
       - master_node
 
   slave_node_2:
     container_name: slave_node_2
     build: .
-    command: bash -c "./wait-for-it.sh master_node:5000 && pydfs init slave --master_ip master_node"
+    command: |
+      bash -c "
+        ./wait-for-it.sh master_node:5000 &&
+        pydfs init slave --master_ip master_node
+      "
     depends_on:
       - master_node
 
   user_node_1:
     container_name: user_node_1
     build: .
-    command: bash -c "./wait-for-it.sh master_node:5000 && ./wait-for-it.sh slave_node_1:5000 && ./wait-for-it.sh slave_node_2:5000 && pydfs dfs put --path wait-for-it.sh --master_ip master_node && tail -f /dev/null"
+    command: |
+      bash -c "
+        ./wait-for-it.sh master_node:5000 &&
+        ./wait-for-it.sh slave_node_1:5000 &&
+        ./wait-for-it.sh slave_node_2:5000 &&
+        pydfs dfs put --path wait-for-it.sh --master_ip master_node &&
+        tail -f /dev/null
+      "
     depends_on:
       - master_node
       - slave_node_1
@@ -33,7 +48,16 @@ services:
   user_node_2:
     container_name: user_node_2
     build: .
-    command: tail -f /dev/null
+    command: |
+      bash -c "
+        ./wait-for-it.sh master_node:5000 &&
+        ./wait-for-it.sh slave_node_1:5000 &&
+        ./wait-for-it.sh slave_node_2:5000 &&
+        sleep 2 &&
+        cd / &&
+        pydfs dfs get --path wait-for-it.sh --master_ip master_node &&
+        tail -f /dev/null
+      "
     depends_on:
       - master_node
       - slave_node_1

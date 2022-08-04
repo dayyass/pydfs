@@ -1,6 +1,7 @@
 import argparse
 import os
 import sys  # TODO: remove it
+from base64 import b64decode
 
 sys.path.append(".")
 from pydfs import __version__  # noqa: E402
@@ -72,12 +73,19 @@ def _main(args: argparse.Namespace) -> int:
             _logger.info(
                 f"pydfs dfs get --path {args.path} --master_ip {args.master_ip}"
             )
-            cmd_dfs_get_request(
+            response = cmd_dfs_get_request(
                 ip=args.master_ip,
                 path=args.path,
             )
+
+            _logger.info(f"slave response on user: {response}")
+
+            file = b64decode(response.json()["download_file"])
+            with open(args.path, mode="wb") as fp:
+                fp.write(file)
+
             # TODO add error handler
-            _logger.info(f"getting file {args.path} from pydfs succeeded")
+            _logger.info(f"getting and saving file {args.path} from pydfs succeeded")
 
         else:
             err_msg = (

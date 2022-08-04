@@ -23,29 +23,18 @@ With `pydfs init` command you can initialize master and slave nodes - it's prett
 - `pydfs init slave --master_ip [IP]`
 
 ### dfs commands
-- `pydfs dfs put --path PATH --master_ip [IP]`
-- `pydfs dfs get --path PATH --master_ip [IP]`
+- `pydfs dfs put --path [PATH] --master_ip [IP]`
+- `pydfs dfs get --path [PATH] --master_ip [IP]`
 
 ### other commands
 - `pydfs --version`
 - `pydfs --info`
 
-## Docker
-You can use PyDFS with Docker.
-
-To build a docker image with PyDFS run:
-```docker
-docker build -t pydfs .
-```
-<!-- TODO: push image to Docker Hub -->
-
-To run a docker container with PyDFS run:
-```
-docker run -it pydfs
-```
-
-### Docker Compose
-You can also use *docker-compose* to run multi-container application with one master node and two slave nodes.
+### Docker
+You can also use *docker-compose* to run multi-container application with:
+- 1 master node
+- 2 slave nodes
+- 2 user nodes
 ```
 docker-compose up --build
 ```

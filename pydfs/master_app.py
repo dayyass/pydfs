@@ -140,9 +140,9 @@ class GetFileMaster(Resource):
             path=path,
         )
 
-        _logger.debug(f"slave response on master: {response}")
+        _logger.info(f"slave response on master: {response}")
 
-        return {}  # TODO: validate
+        return response.json()
 
 
 api.add_resource(AddSlave, "/add_slave")

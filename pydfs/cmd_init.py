@@ -113,5 +113,5 @@ def _send_slave_ip_to_master(master_ip: str) -> None:
             err_msg = f"HTTP {response.status_code}"
 
         # TODO: maybe warning, not error
-        _logger.error(f"{err_msg}\nslave node was NOT initialized successfully")
+        _logger.error(f"{err_msg}: slave node was NOT initialized successfully")
         raise requests.HTTPError(err_msg)

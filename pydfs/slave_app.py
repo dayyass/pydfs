@@ -1,7 +1,8 @@
 import os
 import sys  # TODO: remove it
+from base64 import b64encode
 
-from flask import Flask, request, send_file
+from flask import Flask, jsonify, request
 from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
 
@@ -59,11 +60,15 @@ class GetFileSlave(Resource):
         )
         _logger.debug(f"full path: {full_path}")
 
-        # TODO: try send_from_directory
-        return send_file(
-            path_or_file=full_path,
-            download_name=path,
-        )  # TODO: validate and refactor
+        # TODO: maybe not b64encode
+        # TODO: close opened file
+        return jsonify(
+            {
+                "download_file": b64encode(open(full_path, mode="rb").read()).decode(
+                    "utf-8"
+                )
+            }
+        )
 
 
 api.add_resource(PutFileSlave, "/put_file")
