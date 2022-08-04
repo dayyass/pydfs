@@ -16,6 +16,6 @@ venv
 master.sqlite
 master.sqlite-journal
 
-pydfs.egg-info
+py_dfs.egg-info
 build/
 dist/
