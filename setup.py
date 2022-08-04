@@ -6,7 +6,7 @@ with open("README.md", mode="r", encoding="utf-8") as fp:
 
 # TODO: add license
 setup(
-    name="pydfs",
+    name="dfs",
     version="0.1.0",
     description="Distributed File System written in Python",
     long_description=long_description,
